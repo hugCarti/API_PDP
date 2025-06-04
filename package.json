@@ -1,0 +1,23 @@
+{
+  "name": "mon-application",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "env-cmd -f ./.env/.env nodemon ./bin/www",
+    "dev": "env-cmd -f ./.env/.env.dev nodemon ./bin/www",
+    "prod": "env-cmd -f ./.env/.env.prod nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.14.2",
+    "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
+  }
+}
