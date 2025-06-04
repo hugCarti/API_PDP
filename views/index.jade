@@ -1,5 +1,19 @@
-extends layout
+extends layouts/layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Bienvenue sur Catway Manager
+  p.
+    Application de gestion des catways et réservations pour votre marina.
+    Connectez-vous pour accéder au tableau de bord.
+
+  form(method="POST" action="/private/login")
+    h2 Connexion
+    div
+      label Email:
+      input(type="email" name="email" required)
+    div
+      label Mot de passe:
+      input(type="password" name="password" required)
+    button(type="submit") Se connecter
+
+  a(href="/documentation") Voir la documentation de l'API
