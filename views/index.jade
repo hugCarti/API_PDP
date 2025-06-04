@@ -1,19 +1,24 @@
-extends layouts/layout
+extends layout
 
 block content
-  h1 Bienvenue sur Catway Manager
-  p.
-    Application de gestion des catways et réservations pour votre marina.
-    Connectez-vous pour accéder au tableau de bord.
+  section.presentation
+    h2 Bienvenue sur le site du Port de plaisance
+    p 
+      | Application de gestion des catways et réservations pour votre marina.
+      | Connectez-vous pour accéder à toutes les fonctionnalités.
 
-  form(method="POST" action="/private/login")
+  section.login-form
     h2 Connexion
-    div
-      label Email:
-      input(type="email" name="email" required)
-    div
-      label Mot de passe:
-      input(type="password" name="password" required)
-    button(type="submit") Se connecter
+    if error
+      p.error= error
+    form(method='POST', action='/private/login')
+      div.form-group
+        label(for='email') Email:
+        input(type='email', name='email', required)
+      div.form-group
+        label(for='password') Mot de passe:
+        input(type='password', name='password', required)
+      button(type='submit') Se connecter
 
-  a(href="/documentation") Voir la documentation de l'API
+  div.links
+    a(href='/documentation') Voir la documentation de l'API
