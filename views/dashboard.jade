@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1 Tableau de Bord - #{user.name}
+
+  section.user-management
+    h2 Gestion des Utilisateurs
+    include partials/user-forms
+
+  section.catway-management
+    h2 Gestion des Catways
+    include partials/catway-forms
+
+  section.reservation-management
+    h2 Gestion des Réservations
+    include partials/reservation-forms
+
+  nav
+    a(href="/catways") Voir tous les Catways
+    a(href="/documentation") Documentation API

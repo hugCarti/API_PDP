@@ -1,14 +1,25 @@
 const express = require('express');
-const router = express.Router();
+const mongoose = require('mongoose');
+const cors = require('cors');
+const private = require('private');
+const catwayRoutes = require('./routes/catwayRoutes');
+const authRoutes = require('./routes/privateRoutes');
 
-const privateRoutes = require('./privateRoutes');
-const catwayRoutes = require('./catwayRoutes');
+const app = express();
 
-router.get('/', (req, res) => {
-  res.json({ message: 'API is working' });
-});
+app.set('views', private.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-router.use('/privates', privateRoutes);
-router.use('/catways', catwayRoutes);
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(private.join(__dirname, 'public')));
 
-module.exports = router;
+app.use('/', privateRoutes);
+app.use('/', catwayRoutes);
+
+mongoose.connect(process.env.URL_MONGO)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+module.exports = app;
