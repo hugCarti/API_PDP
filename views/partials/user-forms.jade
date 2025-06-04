@@ -1,0 +1,35 @@
+//- Création utilisateur
+form(method='POST', action='/api/users')
+  h3 Créer un utilisateur
+  div
+    label Nom:
+    input(type='text', name='name', required)
+  div
+    label Email:
+    input(type='email', name='email', required)
+  div
+    label Mot de passe:
+    input(type='password', name='password', required)
+  button(type='submit') Créer
+
+//- Modification utilisateur
+form(method='PUT', action='/api/users')
+  h3 Modifier un utilisateur
+  div
+    label ID Utilisateur:
+    input(type='text', name='id', required)
+  div
+    label Nouveau Nom:
+    input(type='text', name='name')
+  div
+    label Nouvel Email:
+    input(type='email', name='email')
+  button(type='submit') Modifier
+
+//- Suppression utilisateur
+form(method='DELETE', action='/api/users')
+  h3 Supprimer un utilisateur
+  div
+    label ID Utilisateur:
+    input(type='text', name='id', required)
+  button(type='submit') Supprimer

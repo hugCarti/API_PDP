@@ -1,0 +1,35 @@
+//- Création réservation
+form(method='POST', action='/api/reservations')
+  h3 Créer une réservation
+  div
+    label Numéro Catway:
+    input(type='number', name='catwayNumber', required)
+  div
+    label Nom Client:
+    input(type='text', name='clientName', required)
+  div
+    label Nom Bateau:
+    input(type='text', name='boatName', required)
+  div
+    label Date Arrivée:
+    input(type='datetime-local', name='checkIn', required)
+  div
+    label Date Départ:
+    input(type='datetime-local', name='checkOut', required)
+  button(type='submit') Créer
+
+//- Détails réservation
+form(method='GET', action='/reservations/details')
+  h3 Voir les détails
+  div
+    label ID Réservation:
+    input(type='text', name='id', required)
+  button(type='submit') Voir
+
+//- Suppression réservation
+form(method='DELETE', action='/api/reservations')
+  h3 Supprimer une réservation
+  div
+    label ID Réservation:
+    input(type='text', name='id', required)
+  button(type='submit') Supprimer

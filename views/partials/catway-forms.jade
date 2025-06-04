@@ -1,0 +1,39 @@
+//- Création catway
+form(method='POST', action='/api/catways')
+  h3 Créer un catway
+  div
+    label Type:
+    select(name='type', required)
+      option(value='long') Long
+      option(value='short') Court
+  button(type='submit') Créer
+
+//- Modification catway
+form(method='PUT', action='/api/catways')
+  h3 Modifier un catway
+  div
+    label ID Catway:
+    input(type='text', name='id', required)
+  div
+    label Nouvel État:
+    select(name='catwayState', required)
+      option(value='free') Libre
+      option(value='reserved') Réservé
+      option(value='maintenance') Maintenance
+  button(type='submit') Modifier
+
+//- Détails catway
+form(method='GET', action='/catways/details')
+  h3 Voir les détails
+  div
+    label ID Catway:
+    input(type='text', name='id', required)
+  button(type='submit') Voir
+
+//- Suppression catway
+form(method='DELETE', action='/api/catways')
+  h3 Supprimer un catway
+  div
+    label ID Catway:
+    input(type='text', name='id', required)
+  button(type='submit') Supprimer
