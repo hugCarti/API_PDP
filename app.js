@@ -9,7 +9,7 @@ const app = express();
 
 // Configuration des vues
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // Middlewares
 app.use(cors());
