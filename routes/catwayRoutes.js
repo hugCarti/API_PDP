@@ -30,7 +30,7 @@ router.delete('/api/catways/:id/reservations/:reservationId', authenticate, dele
 // View Routes
 router.get('/catways', authenticate, async (req, res) => {
   try {
-    const catways = await getAllCatways(req, res);
+    const catways = await getAllCatways();
     res.render('catways', { catways });
   } catch (error) {
     res.status(500).render('error', { error });
@@ -39,8 +39,8 @@ router.get('/catways', authenticate, async (req, res) => {
 
 router.get('/catways/:id', authenticate, async (req, res) => {
   try {
-    const catway = await getCatwayById(req, res);
-    const reservations = await getReservationsByCatway(req, res);
+    const catway = await getCatwayById(req.params.id);
+    const reservations = await getReservationsByCatway(req.params.id);
     res.render('catway-details', { catway, reservations });
   } catch (error) {
     res.status(500).render('error', { error });

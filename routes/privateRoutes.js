@@ -3,6 +3,7 @@ const router = express.Router();
 const { register, login, logout } = require('../services/privates');
 const { authenticate } = require('../middlewares/private');
 
+// API Routes
 router.post('/api/auth/register', register);
 router.post('/api/auth/login', login);
 router.post('/api/auth/logout', authenticate, logout);
