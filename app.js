@@ -14,8 +14,8 @@ app.set('view engine', 'pug');
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', privateRoutes);  // Doit être avant la route racine
