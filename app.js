@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/', privateRoutes);  // Doit être avant la route racine
+app.use('/', privateRoutes);
 app.use('/', catwayRoutes);
 
 // Connexion MongoDB

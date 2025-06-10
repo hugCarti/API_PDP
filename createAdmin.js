@@ -1,5 +1,5 @@
-require('dotenv').config({ path: __dirname + '/.env/.env' });
-console.log("Chemin .env:", __dirname + '/.env/.env'); // Debug
+require('dotenv').config({ path: __dirname + '/.env' });
+console.log("Chemin .env:", __dirname + '/.env'); // Debug
 console.log("URL_MONGO:", process.env.URL_MONGO); // Debug
 
 const mongoose = require('mongoose');
