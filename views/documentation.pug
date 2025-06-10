@@ -1,0 +1,30 @@
+extends layouts/layout
+
+block content
+  h1 Documentation de l'API
+
+  section
+    h2 Endpoints Utilisateurs
+    pre.
+      POST /api/privates/register - Enregistrement
+      POST /api/privates/login - Connexion
+      POST /api/privates/logout - Déconnexion
+
+  section
+    h2 Endpoints Catways
+    pre.
+      GET /api/catways - Liste
+      POST /api/catways - Création
+      GET /api/catways/:id - Détails
+      PUT /api/catways/:id - Modification
+      DELETE /api/catways/:id - Suppression
+
+  section
+    h2 Endpoints Réservations
+    pre.
+      GET /api/reservations - Liste
+      POST /api/reservations - Création
+      GET /api/reservations/:id - Détails
+      DELETE /api/reservations/:id - Suppression
+
+  a(href='/') Retour à l'accueil

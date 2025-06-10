@@ -1,0 +1,25 @@
+extends layouts/layout
+
+block content
+  section.presentation
+    h2 Bienvenue sur le site du Port de plaisance Russell
+    p
+      | Application de gestion des catways et réservations.
+    p
+      | Connectez-vous pour accéder à toutes les fonctionnalités.
+
+  section.login-form
+    h2 Connexion
+    if error
+      p.error= error
+    form(method='POST', action='/login')
+      div.form-group
+        label(for='email') Email:
+        input(type='email', name='email', required)
+      div.form-group
+        label(for='password') Mot de passe:
+        input(type='password', name='password', required)
+      button(type='submit') Se connecter
+
+  div.links
+    a(href='/documentation') Voir la documentation de l'API

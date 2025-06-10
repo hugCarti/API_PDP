@@ -1,0 +1,22 @@
+extends layouts/layout
+
+block content
+  h1 Liste des Catways
+
+  table
+    thead
+      tr
+        th Numéro
+        th Type
+        th État
+        th Actions
+    tbody
+      each catway in catways
+        tr
+          td= catway.catwayNumber
+          td= catway.type
+          td= catway.catwayState
+          td
+            a(href=`/catways/${catway._id}`) Détails
+
+  a(href='/dashboard') Retour au tableau de bord

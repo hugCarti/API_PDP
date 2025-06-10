@@ -1,0 +1,15 @@
+extends layouts/layout
+
+block content
+  h1 Détails de la Réservation
+
+  div.details
+    p Catway: ##{reservation.catwayNumber}
+    p Client: #{reservation.clientName}
+    p Bateau: #{reservation.boatName}
+    p 
+      | Arrivée: #{new Date(reservation.checkIn).toLocaleString()}
+      br
+      | Départ: #{new Date(reservation.checkOut).toLocaleString()}
+
+  a(href='/reservations') Retour à la liste

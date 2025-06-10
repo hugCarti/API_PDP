@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title Catway Manager - #{title}
+    link(rel='stylesheet', href='public/stylesheets/style.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+  body
+    header
+      h1 Catway Manager
+      if user
+        nav
+          a(href='/dashboard') Tableau de bord
+          br
+          a(href='/catways') Catways
+          br
+          a(href='/reservations') Réservations
+          br
+          a(href='/auth/logout') Déconnexion
+      else
+        nav
+          a(href='/') Accueil
+          br
+          a(href='/documentation') Documentation
+
+    main
+      block content
+
+    footer
+      p © 2025 Port de plaisance - Tous droits réservés
