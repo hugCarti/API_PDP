@@ -19,10 +19,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
-<<<<<<< HEAD
-// Routes
-=======
->>>>>>> second
 app.use('/', privateRoutes);
 app.use('/', catwayRoutes);
 
