@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f ./.env/.env nodemon ./bin/www",
-    "dev": "env-cmd -f ./.env/.env.dev nodemon ./bin/www",
-    "prod": "env-cmd -f ./.env/.env.prod nodemon ./bin/www"
+    "start": "env-cmd -f ./.env nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^16.5.0",
