@@ -18,6 +18,12 @@ mongoose.connect(process.env.URL_MONGO)
   .then(async () => {
     console.log("Connecté à MongoDB");
 
+    const newPassword = await bcrypt.hash("nouveaumotdepasse", 10);
+    await User.updateOne(
+  
+      { email: "admin@portplaisance.com" },
+      { $set: { password: newPassword } }
+    );
     const adminExists = await User.findOne({ email: 'admin@portplaisance.com' });
     if (adminExists) {
       console.log("Le superadmin existe déjà");

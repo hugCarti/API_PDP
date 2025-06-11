@@ -3,15 +3,13 @@ extends layouts/layout
 block content
   section.presentation
     h2 Bienvenue sur le site du Port de plaisance Russell
-    p
-      | Application de gestion des catways et réservations.
-    p
-      | Connectez-vous pour accéder à toutes les fonctionnalités.
+    p Application de gestion des catways et réservations.
+    p Connectez-vous pour accéder à toutes les fonctionnalités.
 
   section.login-form
     h2 Connexion
     if error
-      p.error= error
+      p.error= error === 'invalid_credentials' ? 'Email ou mot de passe incorrect' : 'Erreur de connexion'
     form(method='POST', action='/login')
       div.form-group
         label(for='email') Email:
