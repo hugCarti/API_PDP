@@ -1,15 +1,33 @@
 extends layouts/layout
 
 block content
-  h1 Détails de la Réservation
+  .container
+    h1 Détails de la Réservation
 
-  div.details
-    p Catway: ##{reservation.catwayNumber}
-    p Client: #{reservation.clientName}
-    p Bateau: #{reservation.boatName}
-    p 
-      | Arrivée: #{new Date(reservation.checkIn).toLocaleString()}
-      br
-      | Départ: #{new Date(reservation.checkOut).toLocaleString()}
+    .card
+      .card-header
+        h2 Informations
+      .card-body
+        table.table
+          tbody
+            tr
+              th Catway
+              td= reservation.catwayNumber
+            tr
+              th Client
+              td= reservation.clientName
+            tr
+              th Bateau
+              td= reservation.boatName
+            tr
+              th Date d'arrivée
+              td= reservation.checkIn.toLocaleDateString()
+            tr
+              th Date de départ
+              td= reservation.checkOut.toLocaleDateString()
 
-  a(href='/reservations') Retour à la liste
+    .mt-4
+      a.btn.btn-primary(href='/reservations') Retour à la liste
+      | 
+      form(method='POST', action=`/api/reservations/${reservation._id}?_method=DELETE`, style='display:inline')
+        button.btn.btn-danger(type='submit', onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')") Supprimer

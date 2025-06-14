@@ -27,12 +27,12 @@ const createCatway = async (req, res) => {
 };
 
 
-const getAllCatways = async (req, res) => {
+const getAllCatways = async () => {
     try {
         const catways = await Catway.find().select('-__v');
-        res.status(200).json(catways);
+        return catways;
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        throw error;
     }
 };
 

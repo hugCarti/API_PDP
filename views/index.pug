@@ -1,23 +1,32 @@
 extends layouts/layout
 
 block content
-  section.presentation
-    h2 Bienvenue sur le site du Port de plaisance Russell
-    p Application de gestion des catways et réservations.
-    p Connectez-vous pour accéder à toutes les fonctionnalités.
+  if !user
+    section.presentation
+      h2 Bienvenue sur le site du Port de plaisance Russell
+      p Application de gestion des catways et réservations.
+      p Connectez-vous pour accéder à toutes les fonctionnalités.
 
-  section.login-form
-    h2 Connexion
-    if error
-      p.error= error === 'invalid_credentials' ? 'Email ou mot de passe incorrect' : 'Erreur de connexion'
-    form(method='POST', action='/login')
-      div.form-group
-        label(for='email') Email:
-        input(type='email', name='email', required)
-      div.form-group
-        label(for='password') Mot de passe:
-        input(type='password', name='password', required)
-      button(type='submit') Se connecter
+    section.login-form
+      h2 Connexion
+      if error
+        p.error= error === 'invalid_credentials' ? 'Email ou mot de passe incorrect' : 'Erreur de connexion'
+      form(method='POST', action='/login')
+        div.form-group
+          label(for='email') Email:
+          input(type='email', name='email', required)
+        div.form-group
+          label(for='password') Mot de passe:
+          input(type='password', name='password', required)
+        button(type='submit') Se connecter
 
-  div.links
-    a(href='/documentation') Voir la documentation de l'API
+    div.links
+      a(href='/documentation') Voir la documentation de l'API
+  else
+    section.dashboard
+      h2 Tableau de bord
+      p Bienvenue #{user.name} !
+      div.actions
+        a.button(href='/catways') Gérer les catways
+        br
+        a.button(href='/reservations') Gérer les réservations

@@ -1,0 +1,17 @@
+extends layouts/layout
+
+block content
+  h1 Gestion des Utilisateurs
+
+  table
+    thead
+      tr
+        th Nom
+        th Email
+    tbody
+      each u in users
+        tr
+          td= u.name
+          td= u.email
+
+  a(href='/dashboard') Retour au tableau de bord

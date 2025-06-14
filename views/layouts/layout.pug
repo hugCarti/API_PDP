@@ -9,19 +9,19 @@ html
       h1 Catway Manager
       if user
         nav
-          a(href='/index') Tableau de bord
-          br
+          a(href='/dashboard') Tableau de bord
+          | |
           a(href='/catways') Catways
-          br
+          | |
           a(href='/reservations') Réservations
-          br
-          a(href='/logout') Déconnexion
+          | |
+          form(method='POST', action='/logout' style='display:inline')
+            button(type='submit') Déconnexion
       else
         nav
           a(href='/') Accueil
-          br
+          | |
           a(href='/documentation') Documentation
-
     main
       block content
 
