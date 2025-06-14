@@ -6,19 +6,24 @@ const authenticate = async (req, res, next) => {
         const token = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
 
         if (!token) {
-        throw new Error();
+            return next();
         }
 
+        console.log('Token reçu:', token);
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        const user = await User.findOne({ _id: decoded.userId });
+        console.log('Token décodé:', decoded);
 
+        const user = await User.findOne({ _id: decoded.userId });
         if (!user) {
-        throw new Error();
+            console.log('Utilisateur non trouvé pour le token');
+            throw new Error();
         }
 
+        console.log('Utilisateur authentifié:', user.email);
         req.user = user;
         next();
     } catch (error) {
+        console.error('Erreur d\'authentification:', error);
         res.status(401).redirect('/');
     }
 };

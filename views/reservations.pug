@@ -1,0 +1,23 @@
+extends layouts/layout
+
+block content
+  h1 Gestion des Réservations
+  
+  table
+    thead
+      tr
+        th Catway
+        th Client
+        th Bateau
+        th Arrivée
+        th Départ
+    tbody
+      each reservation in reservations
+        tr
+          td= reservation.catwayNumber
+          td= reservation.clientName
+          td= reservation.boatName
+          td= reservation.checkIn.toLocaleDateString()
+          td= reservation.checkOut.toLocaleDateString()
+
+  a(href='/dashboard') Retour au tableau de bord

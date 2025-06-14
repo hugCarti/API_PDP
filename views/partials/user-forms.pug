@@ -13,23 +13,71 @@ form(method='POST', action='/api/users')
   button(type='submit') Créer
 
 //- Modification utilisateur
-form(method='PUT', action='/api/users')
+form(method='POST', action='/api/users/update', onsubmit='submitUserForm(event)')
   h3 Modifier un utilisateur
   div
     label ID Utilisateur:
     input(type='text', name='id', required)
-  div
+  div 
     label Nouveau Nom:
     input(type='text', name='name')
   div
     label Nouvel Email:
     input(type='email', name='email')
+  div
+    label Nouveau Mot de passe (laisser vide pour ne pas changer):
+    input(type='password', name='password')
   button(type='submit') Modifier
 
 //- Suppression utilisateur
-form(method='DELETE', action='/api/users')
+form(method='POST', action='/api/users/delete', onsubmit='return confirmDelete(event)')
   h3 Supprimer un utilisateur
   div
     label ID Utilisateur:
     input(type='text', name='id', required)
   button(type='submit') Supprimer
+
+script.
+  function submitUserForm(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const id = formData.get('id');
+    
+    fetch(`/api/users/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(Object.fromEntries(formData)),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Erreur serveur');
+      return response.json();
+    })
+    .then(data => {
+      alert('Utilisateur modifié avec succès !');
+      window.location.reload();
+    })
+    .catch(error => alert('Erreur : ' + error.message));
+  }
+
+  function confirmDelete(event) {
+    event.preventDefault();
+    const id = event.target.querySelector('input[name="id"]').value;
+    
+    if(confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+      fetch(`/api/users/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Erreur serveur');
+        return response.json();
+      })
+      .then(data => {
+        alert('Utilisateur supprimé avec succès !');
+        window.location.reload();
+      })
+      .catch(error => alert('Erreur : ' + error.message));
+    }
+    return false;
+  }

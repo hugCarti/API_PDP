@@ -1,5 +1,5 @@
 //- Création catway
-form(method='POST', action='/api/catways')
+form(method='POST', action='/api/catways', onsubmit='submitCatwayForm(event)')
   h3 Créer un catway
   div
     label Type:
@@ -8,8 +8,32 @@ form(method='POST', action='/api/catways')
       option(value='short') Court
   button(type='submit') Créer
 
+script.
+  function submitCatwayForm(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    fetch(event.target.action, {
+      method: 'POST',
+      body: JSON.stringify(Object.fromEntries(formData)),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Erreur serveur');
+      return response.json();
+    })
+    .then(data => {
+      alert('Catway créé avec succès !');
+      window.location.reload();
+    })
+    .catch(error => alert('Erreur : ' + error.message));
+  }
+
 //- Modification catway
-form(method='PUT', action='/api/catways')
+form(method='POST', action=`/api/catways/update`, onsubmit='submitUpdateForm(event)')
   h3 Modifier un catway
   div
     label ID Catway:
@@ -22,18 +46,91 @@ form(method='PUT', action='/api/catways')
       option(value='maintenance') Maintenance
   button(type='submit') Modifier
 
+script.
+  function submitUpdateForm(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const id = formData.get('id');
+    const catwayState = formData.get('catwayState');
+
+    fetch(`/api/catways/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ catwayState })
+    })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(err => { throw new Error(err.message); });
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        alert(data.message);
+        window.location.reload();
+      } else {
+        throw new Error(data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Erreur:', error);
+      alert('Erreur: ' + error.message);
+    });
+  }
+
 //- Détails catway
-form(method='GET', action='/catways/details')
+form(method='GET', action=`/catways/${id}`)
   h3 Voir les détails
   div
     label ID Catway:
     input(type='text', name='id', required)
   button(type='submit') Voir
 
+script.
+  function showDetails(id) {
+    window.location.href = `/catways/${id}`;
+  }
+
+//- Dans votre interface, appelez showDetails(catwayId) au lieu d'utiliser le formulaire
 //- Suppression catway
-form(method='DELETE', action='/api/catways')
+form(method='POST', action='/api/catways/delete', onsubmit='return confirmDelete(event)')
   h3 Supprimer un catway
   div
     label ID Catway:
     input(type='text', name='id', required)
   button(type='submit') Supprimer
+
+script.
+  function confirmDelete(event) {
+    event.preventDefault();
+    const id = event.target.querySelector('input[name="id"]').value;
+
+    if(confirm('Êtes-vous sûr de vouloir supprimer ce catway ?')) {
+      fetch(`/api/catways/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => { throw new Error(err.message); });
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          alert(data.message);
+          window.location.reload();
+        } else {
+          throw new Error(data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Erreur:', error);
+        alert('Erreur: ' + error.message);
+      });
+    }
+  }

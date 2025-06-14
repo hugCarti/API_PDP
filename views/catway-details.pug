@@ -1,22 +1,49 @@
 extends layouts/layout
 
 block content
-  h1 Détails du Catway ##{catway.catwayNumber}
+  .container
+    h1 Détails du Catway ##{catway.catwayNumber}
 
-  div.details
-    p Type: #{catway.type}
-    p État: #{catway.catwayState}
+    .card
+      .card-header
+        h2 Informations du Catway
+      .card-body
+        table.table
+          tbody
+            tr
+              th ID:
+              td= catway._id
+            tr
+              th Numéro:
+              td= catway.catwayNumber
+            tr
+              th Type:
+              td= catway.type
+            tr
+              th État:
+              td= catway.catwayState
 
-  h2 Réservations associées
-  if reservations.length > 0
-    ul
-      each reservation in reservations
-        li
-          | #{reservation.clientName} (#{reservation.boatName}) - 
-          | du #{new Date(reservation.checkIn).toLocaleString()} 
-          | au #{new Date(reservation.checkOut).toLocaleString()}
-          a(href=`/reservations/${reservation._id}`) (détails)
-  else
-    p Aucune réservation pour ce catway
+    if reservations && reservations.length > 0
+      .card.mt-4
+        .card-header
+          h2 Réservations associées
+        .card-body
+          table.table
+            thead
+              tr
+                th Client
+                th Bateau
+                th Arrivée
+                th Départ
+            tbody
+              each reservation in reservations
+                tr
+                  td= reservation.clientName
+                  td= reservation.boatName
+                  td= reservation.checkIn.toLocaleDateString()
+                  td= reservation.checkOut.toLocaleDateString()
+    else
+      .alert.alert-info.mt-4 Aucune réservation pour ce catway
 
-  a(href='/catways') Retour à la liste
+    .mt-4
+      a.btn.btn-primary(href='/catways') Retour à la liste
