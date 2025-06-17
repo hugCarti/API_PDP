@@ -1,10 +1,3 @@
-API à exécuter sur Localhost:3000
-
-Email : admin@gmail.com
-mot de passe : admin
-
-npm start
-
 # API de Gestion des Catways - Port de Plaisance
 
 Cette API permet de gérer les catways, les réservations et les utilisateurs pour un port de plaisance. Elle est construite avec Node.js, Express et MongoDB.
@@ -34,3 +27,8 @@ Cette API permet de gérer les catways, les réservations et les utilisateurs po
 3. Adresse : Localhost:3000
 
 4. Pour lancer les tests : npm test
+
+## Connection avec le superutilisateur
+
+Email : admin@gmail.com
+mot de passe : admin
