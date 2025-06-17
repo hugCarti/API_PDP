@@ -3,16 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f ./.env nodemon ./bin/www"
+    "start": "env-cmd -f ./.env nodemon ./bin/www",
+    "test": "NODE_ENV=test mocha test/**/*.test.js --timeout 10000"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",
+    "mocha": "^11.6.0",
     "mongodb": "^6.16.0",
     "mongoose": "^8.14.2",
     "nodemon": "^3.1.10",
